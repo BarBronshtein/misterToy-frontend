@@ -27,7 +27,7 @@ function query(filterBy) {
 }
 
 function getById(toyId) {
-  return storageService.getById(KEY, toyId);
+  return storageService.get(KEY, toyId);
 }
 
 function remove(toyId) {
@@ -53,6 +53,7 @@ function getEmpyToy(name = '', price = 70) {
 function _createToy(name, min, max) {
   const toy = getEmpyToy(name, min, max);
   toy._id = utilService.makeId();
+  return toy;
 }
 
 function _createToys() {
@@ -64,4 +65,5 @@ function _createToys() {
     toys.push(_createToy('Robot', 69));
     toys.push(_createToy('Dancing Cat', 89));
   }
+  utilService.saveToStorage(KEY, toys);
 }
