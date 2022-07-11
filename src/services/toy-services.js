@@ -20,6 +20,7 @@ export const toyService = {
   save,
   getEmpyToy,
   getById,
+  getLabels,
 };
 
 function query(filterBy) {
@@ -48,6 +49,10 @@ function getEmpyToy(name = '', price = 70) {
     createdAt: Date.now(),
     inStock: true,
   };
+}
+
+function getLabels() {
+  return labels;
 }
 
 function _createToy(name, min, max) {
