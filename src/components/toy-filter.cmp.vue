@@ -7,11 +7,12 @@
       placeholder="Search toy..."
     />
     <input type="checkbox" @change="setFilterBy" v-model="filterBy.inStock" />
-    <select multiple>
+    <select v-model="filterBy.labels" multiple>
       <option v-for="opt in options" :key="opt">{{ opt }}</option>
     </select>
     <button @click="setSortBy('date')" class="btn">Date</button>
-    <button @click="setSortBy('txt')" class="btn">Name</button>
+    <button @click="setSortBy('name')" class="btn">Name</button>
+    <button @click="setSortBy('price')" class="btn">Price</button>
   </section>
 </template>
 
@@ -27,10 +28,7 @@ export default {
         inStock: '',
         labels: [],
       },
-      sortBy: {
-        txt: '',
-        maxPrice: 350,
-      },
+      sortBy: '',
     };
   },
   created() {
@@ -38,10 +36,15 @@ export default {
   },
   methods: {
     setFilterBy() {
-      this.$store.commit({ type: 'filter', filterBy: { ...this.filterBy } });
+      this.$store.commit({ type: 'filter', filterBy: this.filterCopy });
     },
     setSortBy() {
       this.$store.commit({ type: 'setSortBy', sortBy: this.sortBy });
+    },
+  },
+  computed: {
+    filterCopy() {
+      return JSON.parse(JSON.stringify(this.filterBy));
     },
   },
 };
