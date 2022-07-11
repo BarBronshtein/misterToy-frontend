@@ -17,9 +17,11 @@ export default {
     };
   },
   created() {
+    console.log('hi');
     const { toyId } = this.$route.params;
     if (toyId) {
       toyService.getById(toyId).then(toy => {
+        console.log(toy);
         this.toyToEdit = JSON.parse(JSON.stringify(toy));
       });
     } else this.toyToEdit = toyService.getEmptyToy();

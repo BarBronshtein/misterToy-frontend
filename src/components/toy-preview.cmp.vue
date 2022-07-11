@@ -9,7 +9,7 @@
       <span v-for="(label, i) in toy.labels" :key="i" class="text-uppercase">{{
         label
       }}</span>
-      <button class="btn" @click="remove(toy._id)">X</button>
+      <button class="btn" @click="removeToy(toy._id)">X</button>
     </div>
   </article>
 </template>
@@ -25,7 +25,7 @@ export default {
   },
   methods: {
     removeToy(toyId) {
-      this.$emit('removeToy', toyId);
+      this.$emit('removedToy', toyId);
     },
   },
 };

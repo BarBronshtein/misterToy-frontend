@@ -1,8 +1,8 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
 import home from '../views/home.vue';
 import toyApp from '../views/toy-app.vue';
-import toyEdit from '../views/toy-details.vue';
-import toyDetails from '../views/toy-edit.vue';
+import toyEdit from '../views/toy-edit.vue';
+import toyDetails from '../views/toy-details.vue';
 
 const router = createRouter({
   history: createWebHashHistory(),
