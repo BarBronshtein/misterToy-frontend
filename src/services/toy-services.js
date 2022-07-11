@@ -18,7 +18,7 @@ export const toyService = {
   query,
   remove,
   save,
-  // getEmpyToy,
+  getEmpyToy,
   getById,
 };
 
