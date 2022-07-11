@@ -18,7 +18,7 @@ export const toyService = {
   query,
   remove,
   save,
-  getEmpyToy,
+  getEmptyToy,
   getById,
   getLabels,
 };
@@ -40,7 +40,7 @@ function save(toy) {
   return storageService.post(KEY, toy);
 }
 
-function getEmpyToy(name = '', price = 70) {
+function getEmptyToy(name = '', price = 70) {
   return {
     _id: '',
     name,
@@ -56,7 +56,7 @@ function getLabels() {
 }
 
 function _createToy(name, min, max) {
-  const toy = getEmpyToy(name, min, max);
+  const toy = getEmptyToy(name, min, max);
   toy._id = utilService.makeId();
   return toy;
 }
