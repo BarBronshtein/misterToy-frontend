@@ -1,18 +1,28 @@
 <template>
   <section class="toy-filter">
-    <input
-      type="search"
-      @input="setFilterBy"
-      v-model="filterBy.txt"
-      placeholder="Search toy..."
-    />
-    <input type="checkbox" @change="setFilterBy" v-model="filterBy.inStock" />
-    <select @change="setFilterBy" v-model="filterBy.labels" multiple>
-      <option v-for="opt in options" :key="opt">{{ opt }}</option>
-    </select>
-    <button @click="setSortBy('date')" class="btn">Date</button>
-    <button @click="setSortBy('name')" class="btn">Name</button>
-    <button @click="setSortBy('price')" class="btn">Price</button>
+    <div class="container">
+      <div class="filter">
+        <input
+          type="search"
+          @input="setFilterBy"
+          v-model="filterBy.txt"
+          placeholder="Search toy..."
+        />
+        <input
+          type="checkbox"
+          @change="setFilterBy"
+          v-model="filterBy.inStock"
+        />
+        <select @change="setFilterBy" v-model="filterBy.labels" multiple>
+          <option v-for="opt in options" :key="opt">{{ opt }}</option>
+        </select>
+      </div>
+      <div class="sort">
+        <button @click="setSortBy('date')" class="btn">Date</button>
+        <button @click="setSortBy('name')" class="btn">Name</button>
+        <button @click="setSortBy('price')" class="btn">Price</button>
+      </div>
+    </div>
   </section>
 </template>
 
