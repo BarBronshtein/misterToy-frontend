@@ -22,22 +22,22 @@ export default {
       if (idx !== -1) state.toys.splice(idx, 1, toy);
       else state.toys.push(toy);
     },
-    actions: {
-      loadToys({ commit }) {
-        toyService.query().then(toys => {
-          commit({ type: 'setToys', toys });
-        });
-      },
-      removeToy({ commit }, { id }) {
-        toyService.remove(id).then(() => {
-          commit({ type: 'removeToy', id });
-        });
-      },
-      saveToy({ commit }, { toy }) {
-        toyService.save(toy).then(toy => {
-          commit({ type: 'saveToy', toy });
-        });
-      },
+  },
+  actions: {
+    loadToys({ commit }) {
+      toyService.query().then(toys => {
+        commit({ type: 'setToys', toys });
+      });
+    },
+    removeToy({ commit }, { id }) {
+      toyService.remove(id).then(() => {
+        commit({ type: 'removeToy', id });
+      });
+    },
+    saveToy({ commit }, { toy }) {
+      toyService.save(toy).then(toy => {
+        commit({ type: 'saveToy', toy });
+      });
     },
   },
 };
