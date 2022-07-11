@@ -1,11 +1,5 @@
 <template>
-  <div class="wrapper">
-    <nav>
-      <router-link to="/">Home</router-link>
-      <router-link to="/about">About</router-link>
-    </nav>
-  </div>
-
+  <router-link to="/toy">To App</router-link>
   <router-view />
 </template>
 

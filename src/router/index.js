@@ -5,7 +5,7 @@ import toyEdit from '../views/toy-details.vue';
 import toyDetails from '../views/toy-edit.vue';
 
 const router = createRouter({
-  history: createWebHashHistory(import.meta.env.BASE_URL),
+  history: createWebHashHistory(),
   routes: [
     {
       path: '/',

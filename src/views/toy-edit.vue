@@ -1,5 +1,6 @@
 <template>
   <section v-if="toyToEdit" class="toy-edit">
+    <router-link to="/toy">Go Back</router-link>
     {{ toyToEdit }}
     <h2>{{ toyToEdit._id ? 'Edit toy' : 'Add toy' }}</h2>
     <form @submit.prevent="saveToy"></form>
@@ -19,7 +20,7 @@ export default {
     const { toyId } = this.$route.params;
     if (toyId) {
       toyService.getById(toyId).then(toy => {
-        this.todoToEdit = JSON.parse(JSON.stringify(toy));
+        this.toyToEdit = JSON.parse(JSON.stringify(toy));
       });
     } else this.toyToEdit = toyService.getEmptyToy();
   },
@@ -32,9 +33,6 @@ export default {
           this.$store.commit('setMsg', { txt: 'Save Toy', type: 'success' });
         });
       this.toyToEdit = toyService.getEmptyToy();
-    },
-    goBack() {
-      this.$router.push('/toy');
     },
   },
 };
