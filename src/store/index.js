@@ -11,3 +11,5 @@ const store = createStore({
     toyStore,
   },
 });
+
+export default store;
