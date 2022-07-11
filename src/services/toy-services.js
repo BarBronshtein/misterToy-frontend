@@ -1,5 +1,7 @@
 import { utilService } from './util-service.js';
 import { storageService } from './async-storage-service.js';
+const axios = require('axios');
+
 const labels = [
   'On wheels',
   'Box game',
@@ -10,7 +12,7 @@ const labels = [
   'Outdoor',
 ];
 const KEY = 'toysDB';
-const API = 'api/toy/';
+const API = '/api/toy/';
 
 _createToys();
 
@@ -24,21 +26,38 @@ export const toyService = {
 };
 
 function query(filterBy) {
-  return storageService.query(KEY);
+  return axios.get(API, { params: filterBy }).then(res => res.data);
+  // return storageService.query(KEY);
 }
 
 function getById(toyId) {
-  return storageService.get(KEY, toyId);
+  return axios
+    .get(API + toyId)
+    .then(res => res.data)
+    .catch(err => {
+      throw new Error(err);
+    });
+  // return storageService.get(KEY, toyId);
 }
 
 function remove(toyId) {
-  return storageService.remove(KEY, toyId);
+  return axios.delete(API + toyId).catch(({}) => {
+    throw Error(err);
+  });
+  // return storageService.remove(KEY, toyId);
 }
 
 function save(toy) {
-  if (!toy._id) return storageService.post(KEY, toy);
-  console.log(toy);
-  return storageService.put(KEY, toy);
+  if (!toy._id) return axios.post(API, toy).then(res => res.data);
+  //  return storageService.post(KEY, toy);
+
+  return axios
+    .put(API + toy._id, toy)
+    .then(res => res.data)
+    .catch(({ response: { data } }) => {
+      throw Error(err);
+    });
+  // return storageService.put(KEY, toy);
 }
 
 function getEmptyToy(name = '', price = 70) {
