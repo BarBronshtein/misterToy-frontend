@@ -30,7 +30,7 @@ function loadFromStorage(key) {
   return data ? JSON.parse(data) : undefined;
 }
 
-function debounce(func, wait) {
+function debounce(func, wait = 500) {
   let timeout;
 
   return function executedFunction(...args) {

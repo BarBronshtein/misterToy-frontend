@@ -1,6 +1,6 @@
 <template>
   <section class="toy-app">
-    <!-- <toy-filter /> -->
+    <toy-filter />
     <toy-list :toys="toys" @removeToy="removeToy" />
     <!-- <section class="pagination"> -->
     <!-- <button @click="setPage(-1)" class="btn-pagination">Prev</button> -->
@@ -11,13 +11,14 @@
 
 <script>
 import toyList from '../components/toy-list.cmp.vue';
-// import toyFilter from '../components/toy-filter.cmp.vue';
+import toyFilter from '../components/toy-filter.cmp.vue';
 export default {
   created() {
     this.$store.dispatch({ type: 'loadToys' });
   },
   components: {
     toyList,
+    toyFilter,
   },
   methods: {
     removeToy(toyId) {

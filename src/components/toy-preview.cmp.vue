@@ -6,9 +6,9 @@
       <p>
         <span>{{ toy.price }}</span>
       </p>
-      <span v-for="(label, i) in toy.labels" :key="i" class="text-uppercase">{{
-        label
-      }}</span>
+      <span v-for="(label, i) in toy.labels" :key="i" class="text-uppercase">
+        |{{ label }}|
+      </span>
       <button class="btn" @click="removeToy(toy._id)">X</button>
     </div>
   </article>
