@@ -36,8 +36,9 @@ function remove(toyId) {
 }
 
 function save(toy) {
-  if (!toy._id) return storageService.put(KEY, toy);
-  return storageService.post(KEY, toy);
+  if (!toy._id) return storageService.post(KEY, toy);
+  console.log(toy);
+  return storageService.put(KEY, toy);
 }
 
 function getEmptyToy(name = '', price = 70) {
