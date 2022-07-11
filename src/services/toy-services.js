@@ -1,6 +1,6 @@
 import { utilService } from './util-service.js';
-import { storageService } from './async-storage-service.js';
-const axios = require('axios');
+// import { storageService } from './async-storage-service.js';
+import axios from 'axios';
 
 const labels = [
   'On wheels',
