@@ -7,6 +7,10 @@ import vue from '@vitejs/plugin-vue';
 export default defineConfig({
   // base: 'misterToy-frontend',
   plugins: [vue()],
+  build: {
+    outDir: '../backend/public',
+    emptyOutDir: true,
+  },
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),

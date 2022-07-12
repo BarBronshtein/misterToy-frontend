@@ -1,5 +1,7 @@
 <template>
-  <router-link to="/toy">To App</router-link>
+  <router-link to="/">Home</router-link> |
+  <router-link to="/toy"> To App</router-link> |
+  <router-link to="/about"> About</router-link>
   <router-view />
 </template>
 

@@ -23,7 +23,12 @@ export const toyService = {
   getEmptyToy,
   getById,
   getLabels,
+  getMapApi,
 };
+
+function getMapApi() {
+  return axios.get('//localhost:3030/api/map').then(res => res.data);
+}
 
 function query(filterBy = null) {
   return axios.get(API, { params: filterBy }).then(res => res.data);

@@ -3,6 +3,7 @@ import home from '../views/home.vue';
 import toyApp from '../views/toy-app.vue';
 import toyEdit from '../views/toy-edit.vue';
 import toyDetails from '../views/toy-details.vue';
+import about from '../views/about.vue';
 
 const router = createRouter({
   history: createWebHashHistory(),
@@ -30,6 +31,7 @@ const router = createRouter({
     {
       path: '/about',
       name: 'about',
+      component: about,
     },
   ],
 });
