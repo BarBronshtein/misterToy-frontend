@@ -9,7 +9,7 @@
       <span v-for="(label, i) in toy.labels" :key="i" class="text-uppercase">
         |{{ label }}|
       </span>
-      <button class="btn" @click="removeToy(toy._id)">X</button>
+      <el-button class="btn" @click="removeToy(toy._id)">X</el-button>
     </div>
   </article>
 </template>

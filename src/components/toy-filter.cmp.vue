@@ -2,25 +2,36 @@
   <section class="toy-filter">
     <div class="container">
       <div class="filter">
-        <input
-          type="search"
+        <el-input
           @input="setFilterBy"
           v-model="filterBy.txt"
           placeholder="Search toy..."
         />
-        <input
-          type="checkbox"
+        <el-checkbox
           @change="setFilterBy"
           v-model="filterBy.inStock"
+          label="In stock"
+          size="large"
+          border
         />
-        <select @change="setFilterBy" v-model="filterBy.labels" multiple>
-          <option v-for="opt in options" :key="opt">{{ opt }}</option>
-        </select>
+
+        <el-select
+          v-model="filterBy.labels"
+          multiple
+          collapse-tags
+          collapse-tags-tooltip
+          placeholder="Select"
+          style="width: 240px"
+        >
+          <el-option v-for="opt in options" :key="opt" :value="opt" />
+        </el-select>
       </div>
       <div class="sort">
-        <button @click="setSortBy('date')" class="btn">Date</button>
-        <button @click="setSortBy('name')" class="btn">Name</button>
-        <button @click="setSortBy('price')" class="btn">Price</button>
+        <el-button @click="setSortBy('date')" type="info" plain>Date</el-button>
+        <el-button @click="setSortBy('name')" type="info" plain>Name</el-button>
+        <el-button @click="setSortBy('price')" type="info" plain
+          >Price</el-button
+        >
       </div>
     </div>
   </section>

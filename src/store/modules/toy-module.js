@@ -8,6 +8,34 @@ export default {
     pageSize: 5,
   },
   getters: {
+    toysPerLabel({ toys }) {
+      if (!toys) return;
+      let obj = {};
+      toys.forEach(toy => {
+        toy.labels.forEach(label => {
+          obj[label] = obj[label] ? obj[label] + 1 : 1;
+        });
+      });
+      return obj;
+    },
+    toysPricePerLabel({ toys }) {
+      if (!toys) return;
+      let objMap = {};
+      toys.forEach(toy => {
+        toy.labels.forEach(label => {
+          objMap[label] = objMap[label] ? objMap[label] + 1 : 1;
+        });
+      });
+
+      let obj = {};
+      toys.forEach(toy => {
+        toy.labels.forEach((label, i) => {
+          if (!obj[label]) obj[label] = toy.price / objMap[label];
+          else obj[label] += toy.price / objMap[label];
+        });
+      });
+      return obj;
+    },
     toysToDisplay({ toys, sortBy }) {
       let toysCopy = JSON.parse(JSON.stringify(toys));
       const { state, status } = sortBy;
