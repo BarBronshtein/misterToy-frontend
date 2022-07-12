@@ -45,10 +45,10 @@ export default {
   },
   methods: {
     setFilterBy() {
-      this.$store.commit({ type: 'filter', filterBy: this.filterCopy });
+      this.$emit('setFilterBy', this.filterCopy);
     },
     setSortBy(status) {
-      this.$store.commit({ type: 'sort', sortBy: status });
+      this.$emit('setSortBy', status);
     },
   },
   computed: {

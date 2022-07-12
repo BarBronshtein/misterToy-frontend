@@ -1,6 +1,6 @@
 <template>
   <section class="toy-app">
-    <toy-filter />
+    <toy-filter @setFilterBy="setFilter" @setSortBy="setSort" />
     <toy-list :toys="toys" @removeToy="removeToy" />
     <!-- <section class="pagination"> -->
     <!-- <button @click="setPage(-1)" class="btn-pagination">Prev</button> -->
@@ -13,9 +13,6 @@
 import toyList from '../components/toy-list.cmp.vue';
 import toyFilter from '../components/toy-filter.cmp.vue';
 export default {
-  created() {
-    this.$store.dispatch({ type: 'loadToys' });
-  },
   components: {
     toyList,
     toyFilter,
@@ -29,6 +26,12 @@ export default {
     },
     setPage(diff) {
       this.$store.commit({ tpye: 'setPage', diff });
+    },
+    setSort(status) {
+      this.$store.commit({ type: 'sort', status });
+    },
+    setFilter(filterBy) {
+      this.$store.dispatch({ type: 'filter', filterBy });
     },
   },
   computed: {

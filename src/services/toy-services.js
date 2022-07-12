@@ -12,7 +12,7 @@ const labels = [
   'Outdoor',
 ];
 const KEY = 'toysDB';
-const API = '/api/toy/';
+const API = '//localhost:3030/api/toy/';
 
 _createToys();
 
@@ -25,7 +25,7 @@ export const toyService = {
   getLabels,
 };
 
-function query(filterBy) {
+function query(filterBy = null) {
   return axios.get(API, { params: filterBy }).then(res => res.data);
   // return storageService.query(KEY);
 }
@@ -55,7 +55,7 @@ function save(toy) {
     .put(API + toy._id, toy)
     .then(res => res.data)
     .catch(({ response: { data } }) => {
-      throw Error(err);
+      throw Error(data);
     });
   // return storageService.put(KEY, toy);
 }

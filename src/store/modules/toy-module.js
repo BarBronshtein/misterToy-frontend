@@ -3,39 +3,24 @@ import { toyService } from '../../services/toy-services';
 export default {
   state: {
     toys: null,
-    filterBy: { txt: '', inStock: true, labels: [] },
     sortBy: { state: 1, status: '' },
     page: { numPages: null, curPage: 0 },
     pageSize: 5,
   },
   getters: {
-    toysToDisplay(state) {
-      let toys = state.toys;
-      if (!toys) return;
-      const filterBy = state.filterBy;
-      if (!filterBy.inStock) {
-        toys = toys.filter(toy => !toy.inStock);
-      }
-      if (filterBy.labels.length) {
-        toys = toys.filter(toy =>
-          toy.labels.some(label => label.includes(state.filterBy.labels))
+    toysToDisplay({ toys, sortBy }) {
+      let toysCopy = JSON.parse(JSON.stringify(toys));
+      const { state, status } = sortBy;
+      if (status)
+        toysCopy = toysCopy.sort(
+          (a, b) =>
+            (status === 'date' && (a.createdAt - b.createAt) * state) ||
+            (status === 'name' && a.name.localeCompare(b.name) * state) ||
+            (status === 'price' && (a.price - b.price) * state)
         );
-      }
-      const regex = new RegExp(filterBy.txt, 'i');
-      toys = toys.filter(toy => regex.test(toy.name));
 
-      if (state.sortBy.status === 'date')
-        toys = toys.sort(
-          (a, b) => (a.createdAt - b.createAt) * state.sortBy.state
-        );
-      else if (state.sortBy.status === 'name')
-        toys = toys.sort(
-          (a, b) => a.name.localeCompare(b.name) * state.sortBy.state
-        );
-      else if (state.sortBy.status === 'price')
-        toys = toys.sort((a, b) => (a.price - b.price) * state.sortBy.state);
       // TODO : complete pagination
-      return toys;
+      return toysCopy;
     },
   },
   mutations: {
@@ -57,19 +42,21 @@ export default {
       if (state.page.curPage < 0) state.page.curPage = state.page.numPages;
       if (state.page.curPage > state.page.numPages) state.page.curPage = 0;
     },
-    filter(state, { filterBy }) {
-      state.filterBy = filterBy;
-    },
-    sort(state, { sortBy }) {
-      console.log(sortBy);
-      if (state.sortBy.status === sortBy) state.sortBy.state *= -1;
+
+    sort(state, { status }) {
+      if (state.sortBy.status === status) state.sortBy.state *= -1;
       else state.sortBy.state = 1;
-      state.sortBy.status = sortBy;
+      state.sortBy.status = status;
     },
   },
   actions: {
     loadToys({ commit }) {
-      toyService.query().then(toys => {
+      toyService.query({ inStock: true }).then(toys => {
+        commit({ type: 'setToys', toys });
+      });
+    },
+    filter({ commit }, { filterBy }) {
+      toyService.query(filterBy).then(toys => {
         commit({ type: 'setToys', toys });
       });
     },

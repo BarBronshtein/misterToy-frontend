@@ -5,7 +5,7 @@ import vue from '@vitejs/plugin-vue';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: 'misterToy-frontend',
+  // base: 'misterToy-frontend',
   plugins: [vue()],
   resolve: {
     alias: {
