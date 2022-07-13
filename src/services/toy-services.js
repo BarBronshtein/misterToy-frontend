@@ -12,10 +12,10 @@ const labels = [
   'Outdoor',
 ];
 const KEY = 'toysDB';
-const API =
-  process.env.NODE_ENV !== 'development'
-    ? '/api/toy/'
-    : '//localhost:3000/api/toy/';
+const API = '//localhost:3030/api/toy/';
+// process.env.NODE_ENV !== 'development'
+//   ? '/api/toy/'
+//   : '//localhost:3030/api/toy/';
 
 _createToys();
 
@@ -30,13 +30,10 @@ export const toyService = {
 };
 
 function getMapApi() {
-  return axios
-    .get(
-      process.env.NODE_ENV !== 'development'
-        ? '/api/map/'
-        : '//localhost:3000/api/map/'
-    )
-    .then(res => res.data);
+  return axios.get('//localhost:3030/api/map/').then(res => {
+    console.log(res.data);
+    return res.data;
+  });
 }
 
 function query(filterBy = null) {

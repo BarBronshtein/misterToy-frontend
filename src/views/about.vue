@@ -3,57 +3,64 @@
     <div class="container">
       <GMapMap
         :center="center"
-        :zoom="13"
+        :zoom="12"
         map-type-id="terrain"
-        style="width: 50vw; height: 900px"
+        style="width: 800px; height: 800px"
       >
-        <GMapMarker
-          :key="i"
-          v-for="(m, i) in markers"
-          :position="m.position"
-          :clickable="true"
-          @click="center = m.position"
-        />
+        <GMapCluster>
+          <GMapMarker
+            :key="index"
+            v-for="(m, index) in markers"
+            :position="m.position"
+            :clickable="true"
+            @click="center = m.position"
+          />
+        </GMapCluster>
       </GMapMap>
       <div class="locations">
-        <h2>Store Branches</h2>
-        <span
-          v-for="m in markers"
-          @click="center = m.position"
-          class="location-btn"
-          >{{ m.location }}</span
+        <h2>Stores locations</h2>
+        <el-button
+          type="info"
+          class="btn-locations"
+          v-for="marker in markers"
+          :key="marker"
+          @click="center = marker.position"
         >
+          {{ marker.location }}
+        </el-button>
       </div>
     </div>
   </section>
 </template>
-
 <script>
 export default {
-  name: 'App',
+  name: 'map',
   data() {
     return {
+      center: { lat: 32.07446846, lng: 34.791617341 },
       markers: [
         {
           position: {
-            lat: { lat: 32.066278, lng: 34.830301 },
-            location: 'Tel Aviv',
+            lat: 32.07446846,
+            lng: 34.791617341,
           },
+          location: 'tel-aviv',
+        },
+        {
           position: {
-            lat: { lat: 32.0123545, lng: 34.84212 },
-            location: 'Haifa',
+            lat: 29.549795,
+            lng: 34.95463,
           },
+          location: 'eilat',
+        },
+        {
           position: {
-            lat: { lat: 32.1123545, lng: 34.83212 },
-            location: 'Ashdod',
+            lat: 32.65971,
+            lng: 35.10516,
           },
-          position: {
-            lat: { lat: 34.0113545, lng: 32.554212 },
-            location: 'Ashdod Ber Sheva',
-          },
+          location: 'yokneam',
         },
       ],
-      center: { lat: 32.066278, lng: 34.830301 },
     };
   },
 };

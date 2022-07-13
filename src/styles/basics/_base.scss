@@ -1,0 +1,66 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  line-height: lh(26px);
+}
+
+body {
+  margin: 0;
+  background-color: $clr2;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 500;
+  line-height: lh(40px, 29px);
+}
+
+h1 {
+  font-size: rem(60px);
+}
+
+h2 {
+  font-size: rem(16px);
+  color: $clr1;
+}
+
+h3 {
+  font-size: rem(29px);
+}
+
+img {
+  width: 100%;
+}
+
+.btn {
+  @include btn;
+
+  &-dark {
+    @include btn($type: dark);
+  }
+
+  &-light {
+    @include btn($type: light);
+  }
+}
+
+// links
+a {
+  color: $clr1;
+
+  &.active {
+    background-color: $clr1;
+    color: $clr2;
+  }
+}
+
+mark {
+  color: $clr1;
+  background-color: transparent;
+}
