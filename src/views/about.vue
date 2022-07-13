@@ -1,34 +1,33 @@
 <template>
   <section class="about-page">
-    <div class="container">
-      <GMapMap
-        :center="center"
-        :zoom="12"
-        map-type-id="terrain"
-        style="width: 800px; height: 800px"
+    <GMapMap
+      :center="center"
+      :zoom="12"
+      map-type-id="terrain"
+      class="flex align-center justify-center"
+      style="width: 800px; height: 800px"
+    >
+      <GMapCluster>
+        <GMapMarker
+          :key="index"
+          v-for="(m, index) in markers"
+          :position="m.position"
+          :clickable="true"
+          @click="center = m.position"
+        />
+      </GMapCluster>
+    </GMapMap>
+    <div class="locations text-center">
+      <h2>Stores locations</h2>
+      <el-button
+        type="info"
+        class="btn-locations"
+        v-for="marker in markers"
+        :key="marker"
+        @click="center = marker.position"
       >
-        <GMapCluster>
-          <GMapMarker
-            :key="index"
-            v-for="(m, index) in markers"
-            :position="m.position"
-            :clickable="true"
-            @click="center = m.position"
-          />
-        </GMapCluster>
-      </GMapMap>
-      <div class="locations">
-        <h2>Stores locations</h2>
-        <el-button
-          type="info"
-          class="btn-locations"
-          v-for="marker in markers"
-          :key="marker"
-          @click="center = marker.position"
-        >
-          {{ marker.location }}
-        </el-button>
-      </div>
+        {{ marker.location }}
+      </el-button>
     </div>
   </section>
 </template>

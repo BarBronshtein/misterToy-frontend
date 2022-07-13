@@ -1,5 +1,6 @@
 * {
   box-sizing: border-box;
+  margin: 0;
 }
 
 html {
@@ -7,31 +8,11 @@ html {
 }
 
 body {
-  margin: 0;
-  background-color: $clr2;
+  background-color: $clr1;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-weight: 500;
-  line-height: lh(40px, 29px);
-}
-
-h1 {
-  font-size: rem(60px);
-}
-
-h2 {
-  font-size: rem(16px);
-  color: $clr1;
-}
-
-h3 {
-  font-size: rem(29px);
+#app {
+  min-height: 100vh;
 }
 
 img {
@@ -52,11 +33,11 @@ img {
 
 // links
 a {
-  color: $clr1;
+  color: $clr2;
 
   &.active {
-    background-color: $clr1;
-    color: $clr2;
+    background-color: $clr6;
+    color: $clr6;
   }
 }
 

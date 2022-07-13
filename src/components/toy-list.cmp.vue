@@ -1,6 +1,6 @@
 <template>
   <section class="toy-list">
-    <ul class="container">
+    <ul class="clean-list">
       <li v-for="toy in toys" :key="toy._id">
         <toy-preview :toy="toy" @removedToy="$emit('removeToy', $event)" />
         <router-link :to="'/toy/edit/' + toy._id">Edit </router-link>|

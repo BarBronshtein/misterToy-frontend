@@ -1,8 +1,12 @@
 <template>
-  <router-link to="/">Home</router-link> |
-  <router-link to="/toy"> To App</router-link> |
-  <router-link to="/about"> About</router-link>
-  <router-view />
+  <main class="main-layout">
+    <nav class="main-nav">
+      <router-link to="/">Home</router-link> |
+      <router-link to="/toy"> To App</router-link> |
+      <router-link to="/about"> About</router-link>
+    </nav>
+    <router-view />
+  </main>
 </template>
 
 <script>
@@ -14,6 +18,4 @@ export default {
 };
 </script>
 
-<style>
-@import '@/assets/base.css';
-</style>
+<style></style>

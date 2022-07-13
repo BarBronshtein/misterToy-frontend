@@ -1,7 +1,17 @@
 <template>
-  <h2>Check out Some of our data</h2>
-  <DoughnutChart :chartData="testData" />
-  <DoughnutChart :chartData="testPriceData" />
+  <main class="home-page">
+    <section class="charts">
+      <div class="toys-type">
+        <h2>Toys by label</h2>
+        <DoughnutChart :chartData="testData" />
+      </div>
+      <div class="toys-type-price">
+        <h2>Toys price by label</h2>
+        <DoughnutChart :chartData="testPriceData" />
+      </div>
+    </section>
+    <img src="../assets/img/home-svg.png" alt="" />
+  </main>
 </template>
 
 <script>

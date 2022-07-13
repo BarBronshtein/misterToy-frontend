@@ -1,9 +1,9 @@
 // COLOR PALETTE
-$clr1: #ff521c;
-$clr2: #000;
-$clr3: #fff;
-$clr4: darken($clr3, 40%);
-$clr5: #2d2d2d;
+$clr1: #fec5bb;
+$clr2: complement($clr1);
+$clr3: #333;
+$clr4: darken($clr2, 40%);
+$clr6: darken($clr1, 10%);
 
 // LAYOUT
 $layoutPadding: 20px;

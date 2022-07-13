@@ -1,15 +1,15 @@
 <template>
   <article class="toy-preview">
-    <div class="toy-container">
+    <div class="card">
       <!-- <img :src="toy.photo" :alt="toy.name"> -->
-      <h4>{{ toy.name }}</h4>
+      <h4>{{ toy.name }} <el-button  class="btn" @click="removeToy(toy._id)">X</el-button></h4> 
+      
       <p>
-        <span>{{ toy.price }}</span>
+        <p>Price: $ {{ toy.price }}</p>
       </p>
-      <span v-for="(label, i) in toy.labels" :key="i" class="text-uppercase">
-        |{{ label }}|
-      </span>
-      <el-button class="btn" @click="removeToy(toy._id)">X</el-button>
+      <p v-for="(label, i) in toy.labels" :key="i" class="uppercase">
+        {{ label }}
+      </p>
     </div>
   </article>
 </template>

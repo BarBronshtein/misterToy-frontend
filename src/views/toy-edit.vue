@@ -3,11 +3,7 @@
     <router-link to="/toy">Go Back</router-link>
     {{ toyToEdit }}
     <h2>{{ toyToEdit._id ? 'Edit toy' : 'Add toy' }}</h2>
-    <el-form
-      @submit.prevent="saveToy"
-      class="container"
-      style="max-width: 580px"
-    >
+    <el-form @keyup.enter="saveToy" class="container" style="max-width: 580px">
       <el-form-item>
         <span> Toy name</span>
         <el-input
@@ -15,7 +11,6 @@
           placeholder="Please enter toy name"
           required
           clearable
-          style="width: 50%,padding-inline-start:1rem"
         />
       </el-form-item>
       <el-form-item>
@@ -40,7 +35,18 @@
         </el-select>
       </el-form-item>
 
-      <el-button class="btn-add-toy">
+      <p>
+        <el-checkbox
+          @input="toyToEdit.inStock = !toyToEdit.inStock"
+          v-model="toyToEdit.inStock"
+          label="In stock"
+          size="large"
+          style="width: 100%"
+          border
+        />
+      </p>
+
+      <el-button @click="saveToy" class="btn-add-toy">
         {{ toyToEdit._id ? 'Update toy' : 'Add toy' }}
       </el-button>
     </el-form>
