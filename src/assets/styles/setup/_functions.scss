@@ -10,3 +10,12 @@
 @function lh($pixels, $context: 16px) {
   @return ($pixels/$context);
 }
+
+// Set Text Color
+@function set-text-color($color) {
+  @if (lightness($color) >50) {
+    @return #000;
+  } @else {
+    @return #fff;
+  }
+}

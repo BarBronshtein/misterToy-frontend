@@ -1,10 +1,12 @@
 <template>
   <section class="toy-list">
     <ul class="clean-list">
-      <li v-for="toy in toys" :key="toy._id">
-        <toy-preview :toy="toy" @removedToy="$emit('removeToy', $event)" />
-        <router-link :to="'/toy/edit/' + toy._id">Edit </router-link>|
-        <router-link :to="'/toy/details/' + toy._id"> Details</router-link>
+      <li v-for="(toy, i) in toys" :key="toy._id">
+        <toy-preview
+          :i="i"
+          :toy="toy"
+          @removedToy="$emit('removeToy', $event)"
+        />
       </li>
     </ul>
   </section>

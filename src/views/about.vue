@@ -5,7 +5,7 @@
       :zoom="12"
       map-type-id="terrain"
       class="flex align-center justify-center"
-      style="width: 800px; height: 800px"
+      style="width: 80vw; height: 60vh"
     >
       <GMapCluster>
         <GMapMarker

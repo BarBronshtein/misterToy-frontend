@@ -9,10 +9,6 @@
   align-self: center;
 }
 
-.text-center {
-  text-align: center;
-}
-
 .flex.align-center {
   align-items: center;
 }
@@ -33,10 +29,22 @@
   transform: rotate(-180deg);
 }
 
+.text-center {
+  text-align: center;
+}
+
 .tag-text {
   color: $clr3;
   text-transform: uppercase;
   @include type(boldCondensed);
+}
+.uppercase {
+  text-transform: uppercase;
+}
+
+// grid
+.gird {
+  display: grid;
 }
 
 // Aspect ratios

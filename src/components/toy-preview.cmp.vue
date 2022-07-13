@@ -1,8 +1,8 @@
 <template>
-  <article class="toy-preview">
-    <div class="card">
-      <!-- <img :src="toy.photo" :alt="toy.name"> -->
-      <h4>{{ toy.name }} <el-button  class="btn" @click="removeToy(toy._id)">X</el-button></h4> 
+  <article class="toy-preview card">
+    <div class="toy-description">
+
+      <h4>{{ toy.name }}</h4> 
       
       <p>
         <p>Price: $ {{ toy.price }}</p>
@@ -10,6 +10,18 @@
       <p v-for="(label, i) in toy.labels" :key="i" class="uppercase">
         {{ label }}
       </p>
+      <div class="actions">
+        <el-button  type="primary"  >
+          <router-link  :to="'/toy/details/' + toy._id"> Details</router-link>
+        </el-button>
+        <el-button type="warning">
+          <router-link  :to="'/toy/edit/' + toy._id">Edit </router-link>
+        </el-button>
+        <el-button type="danger"  @click="removeToy(toy._id)">Remove</el-button>
+      </div>
+  </div>
+      <div class="img-container">
+      <img :src="`https://source.unsplash.com/random/?toy${i}/?toy` " :alt="toy.name">
     </div>
   </article>
 </template>
@@ -22,6 +34,7 @@ export default {
   computed: {},
   props: {
     toy: { type: Object },
+    i:{type:Number}
   },
   methods: {
     removeToy(toyId) {

@@ -10,6 +10,7 @@ const labels = [
   'Doll',
   'Puzzle',
   'Outdoor',
+  'Battery Powered',
 ];
 const KEY = 'toysDB';
 const API = '//localhost:3030/api/toy/';

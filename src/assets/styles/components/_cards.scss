@@ -1,0 +1,29 @@
+.card {
+  background-color: darken($clr1, 20%);
+  height: 35vh;
+  display: grid;
+  grid-template-columns: 4fr 3fr;
+
+  > * {
+    height: 100%;
+    display: grid;
+    padding: 1rem;
+  }
+
+  h4 {
+    font-size: rem(26px);
+  }
+
+  .actions {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  img {
+    height: 100%;
+    max-height: 275px;
+    align-self: center;
+    object-fit: cover;
+  }
+}
