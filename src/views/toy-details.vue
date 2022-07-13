@@ -17,11 +17,10 @@ export default {
   },
   created() {
     const { toyId } = this.$route.params;
-    if (toyId)
-      toyService.getById(toyId).then(toy => {
-        this.toy = toy;
-      });
-    else this.$router.push('/toy');
+    if (!toyId) return this.$router.push('/toy');
+    toyService.getById(toyId).then(toy => {
+      this.toy = toy;
+    });
   },
 };
 </script>

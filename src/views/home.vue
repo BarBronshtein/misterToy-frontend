@@ -5,7 +5,6 @@
 </template>
 
 <script>
-import { toyService } from '../services/toy-services.js';
 import { DoughnutChart } from 'vue-chart-3';
 import { Chart, registerables } from 'chart.js';
 
@@ -18,7 +17,7 @@ export default {
   },
   computed: {
     testData() {
-      const testData = {
+      return {
         labels: Object.keys(this.$store.getters.toysPerLabel || ''),
         datasets: [
           {
@@ -35,27 +34,25 @@ export default {
           },
         ],
       };
-      return testData;
     },
     testPriceData() {
-      const testData = {
+      return {
         labels: Object.keys(this.$store.getters.toysPricePerLabel || ''),
         datasets: [
           {
             data: Object.values(this.$store.getters.toysPricePerLabel || ''),
             backgroundColor: [
-              '#77CEFF',
-              '#0079AF',
-              '#123E6B',
-              '#97B0C4',
-              '#A5C8ED',
-              '#7A8CDE1',
-              '#64C11C2',
+              '#27CEFF',
+              '#A079AF',
+              '#624E6B',
+              '#477AC4',
+              '#AC58ED',
+              '#71820AE',
+              '#310CCC2',
             ],
           },
         ],
       };
-      return testData;
     },
   },
 };
