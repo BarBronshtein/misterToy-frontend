@@ -1,12 +1,12 @@
 <template>
   <section class="toy-filter">
-    <div class="filter">
-      <el-input
-        @input="setFilterBy"
-        v-model="filterBy.txt"
-        clearable
-        placeholder="Search toy..."
-      />
+    <el-input
+      @input="setFilterBy"
+      v-model="filterBy.txt"
+      clearable
+      placeholder="Search toy..."
+    />
+    <div class="filter-form">
       <el-checkbox
         @input="setFilterBy"
         v-model="filterBy.inStock"
@@ -24,11 +24,13 @@
       >
         <el-option v-for="opt in options" :key="opt" :value="opt" />
       </el-select>
-    </div>
-    <div class="sort">
-      <el-button @click="setSortBy('date')" type="info" plain>Date</el-button>
-      <el-button @click="setSortBy('name')" type="info" plain>Name</el-button>
-      <el-button @click="setSortBy('price')" type="info" plain>Price</el-button>
+      <div class="sort">
+        <el-button @click="setSortBy('date')" type="info" plain>Date</el-button>
+        <el-button @click="setSortBy('name')" type="info" plain>Name</el-button>
+        <el-button @click="setSortBy('price')" type="info" plain
+          >Price</el-button
+        >
+      </div>
     </div>
   </section>
 </template>

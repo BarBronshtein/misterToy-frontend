@@ -5,7 +5,12 @@ export const utilService = {
   loadFromStorage,
   debounce,
   timeAgo,
+  makeRandNum,
 };
+
+function makeRandNum() {
+  return Math.trunc(Date.now() % 100);
+}
 
 function makeId(length = 5) {
   var text = '';
@@ -57,6 +62,7 @@ function timeAgo(input) {
     seconds: 1,
   };
   const secondsElapsed = (date.getTime() - Date.now()) / 1000;
+
   for (let key in ranges) {
     if (ranges[key] < Math.abs(secondsElapsed)) {
       const delta = secondsElapsed / ranges[key];

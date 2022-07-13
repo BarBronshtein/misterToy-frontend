@@ -21,7 +21,7 @@
       </div>
   </div>
       <div class="img-container">
-      <img :src="`https://source.unsplash.com/random/?toy${i}/?toy` " :alt="toy.name">
+      <img :src="toy.image" :alt="toy.name">
     </div>
   </article>
 </template>
@@ -34,7 +34,6 @@ export default {
   computed: {},
   props: {
     toy: { type: Object },
-    i:{type:Number}
   },
   methods: {
     removeToy(toyId) {

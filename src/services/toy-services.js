@@ -80,6 +80,7 @@ function getEmptyToy(name = '', price = 70) {
     labels: ['Doll', 'Battery Powered', 'Baby'],
     createdAt: Date.now(),
     inStock: true,
+    image: `https://source.unsplash.com/random/?toy${utilService.makeRandNum()}/?toy`,
   };
 }
 
