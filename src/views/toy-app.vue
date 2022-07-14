@@ -32,7 +32,7 @@ export default {
       this.$store.commit({ type: 'sort', status });
     },
     setFilter(filterBy) {
-      this.$store.dispatch({ type: 'filter', filterBy });
+      this.$store.dispatch({ type: 'loadToys', filterBy });
     },
   },
   computed: {

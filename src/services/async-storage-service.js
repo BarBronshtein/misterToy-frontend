@@ -9,53 +9,60 @@ export const storageService = {
   postMany,
 };
 
-function query(entityType) {
+async function query(entityType) {
   var entities = JSON.parse(localStorage.getItem(entityType)) || [];
-  return Promise.resolve(entities);
+  return entities;
 }
 
-function get(entityType, entityId) {
-  return query(entityType).then(entities =>
-    entities.find(entity => entity._id === entityId)
-  );
+async function get(entityType, entityId) {
+  try {
+    const entities = await query(entityType);
+    entities.find(entity => entity._id === entityId);
+  } catch (err) {
+    throw new Error('Cannot get entity');
+  }
 }
 
-function post(entityType, newEntity) {
+async function post(entityType, newEntity) {
   newEntity._id = utilService.makeId();
-  return query(entityType).then(entities => {
-    entities.push(newEntity);
-    _save(entityType, entities);
-    return newEntity;
-  });
+  const entities = await query(entityType);
+  entities.push(newEntity);
+  _save(entityType, entities);
+  return newEntity;
 }
 
-function postMany(entityType, newEntities) {
-  return query(entityType).then(entities => {
-    newEntities = newEntities.map(entity => ({
-      ...entity,
-      id: utilService.makeId(),
-    }));
-    entities.push(...newEntities);
-    _save(entityType, entities);
-    return entities;
-  });
+async function postMany(entityType, newEntities) {
+  const entities = await query(entityType);
+  newEntities = newEntities.map(entity => ({
+    ...entity,
+    id: utilService.makeId(),
+  }));
+  entities.push(...newEntities);
+  _save(entityType, entities);
+  return entities;
 }
 
-function put(entityType, updatedEntity) {
-  return query(entityType).then(entities => {
+async function put(entityType, updatedEntity) {
+  try {
+    const entities = await query(entityType);
     const idx = entities.findIndex(entity => entity._id === updatedEntity._id);
     entities.splice(idx, 1, updatedEntity);
     _save(entityType, entities);
     return updatedEntity;
-  });
+  } catch (err) {
+    console.error(err);
+  }
 }
 
-function remove(entityType, entityId) {
-  return query(entityType).then(entities => {
+async function remove(entityType, entityId) {
+  try {
+    const entities = await query(entityType);
     const idx = entities.findIndex(entity => entity._id === entityId);
     entities.splice(idx, 1);
     _save(entityType, entities);
-  });
+  } catch (err) {
+    console.error(err);
+  }
 }
 
 function _save(entityType, entities) {

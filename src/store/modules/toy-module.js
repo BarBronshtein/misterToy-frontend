@@ -47,7 +47,6 @@ export default {
             (status === 'price' && (a.price - b.price) * state)
         );
 
-      // TODO : complete pagination
       return toysCopy;
     },
   },
@@ -78,22 +77,17 @@ export default {
     },
   },
   actions: {
-    loadToys({ commit }) {
-      toyService.query({ inStock: true }).then(toys => {
+    async loadToys({ commit }, { filterBy = { inStock: true } }) {
+      toyService.query({ filterBy }).then(toys => {
         commit({ type: 'setToys', toys });
       });
     },
-    filter({ commit }, { filterBy }) {
-      toyService.query(filterBy).then(toys => {
-        commit({ type: 'setToys', toys });
-      });
-    },
-    removeToy({ commit }, { toyId }) {
+    async removeToy({ commit }, { toyId }) {
       toyService.remove(toyId).then(() => {
         commit({ type: 'removeToy', toyId });
       });
     },
-    saveToy({ commit }, { toy }) {
+    async saveToy({ commit }, { toy }) {
       toyService.save(toy).then(toy => {
         commit({ type: 'saveToy', toy });
       });

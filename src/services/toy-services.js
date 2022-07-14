@@ -30,45 +30,58 @@ export const toyService = {
   getMapApi,
 };
 
-function getMapApi() {
-  return axios.get('//localhost:3030/api/map/').then(res => {
-    console.log(res.data);
+async function getMapApi() {
+  try {
+    const res = await axios.get('//localhost:3030/api/map/');
     return res.data;
-  });
+  } catch (err) {
+    console.error(err);
+    // throw new Error('Oops try again later')
+  }
 }
 
-function query(filterBy = null) {
-  return axios.get(API, { params: filterBy }).then(res => res.data);
-  // return storageService.query(KEY);
+async function query(filterBy = null) {
+  try {
+    const res = await axios.get(API, { params: filterBy });
+    return res.data;
+  } catch (err) {
+    console.error(err);
+    // throw new Error('Oops try again later')
+  }
+  return;
 }
 
-function getById(toyId) {
-  return axios
-    .get(API + toyId)
-    .then(res => res.data)
-    .catch(err => {
-      throw new Error(err);
-    });
-  // return storageService.get(KEY, toyId);
+async function getById(toyId) {
+  try {
+    const res = await axios.get(API + toyId);
+    return res.data;
+  } catch (err) {
+    throw new Error(err);
+  }
 }
 
-function remove(toyId) {
-  return axios.delete(API + toyId).catch(({}) => {
+async function remove(toyId) {
+  try {
+    return await axios.delete(API + toyId);
+  } catch (err) {
     throw Error(err);
-  });
+  }
   // return storageService.remove(KEY, toyId);
 }
 
-function save(toy) {
-  if (!toy._id) return axios.post(API, toy).then(res => res.data);
-  //  return storageService.post(KEY, toy);
+async function save(toy) {
+  try {
+    if (!toy._id) {
+      const res = await axios.post(API, toy);
+      return res.data;
+    }
+    //  return storageService.post(KEY, toy);
 
-  return axios
-    .put(API + toy._id, toy)
-    .then(res => res.data)
-    .catch(({ response: { data } }) => {
-      throw Error(data);
-    });
+    const res = await axios.put(API + toy._id, toy);
+    return res.data;
+  } catch ({ response: { data } }) {
+    throw Error(data);
+  }
   // return storageService.put(KEY, toy);
 }
 
@@ -90,7 +103,6 @@ function getLabels() {
 
 function _createToy(name, min, max) {
   const toy = getEmptyToy(name, min, max);
-  toy._id = utilService.makeId();
   return toy;
 }
 
