@@ -6,12 +6,11 @@
       clearable
       placeholder="Search toy..."
     />
-    <div class="filter-form">
+    <div class="filter-form text-center">
       <el-checkbox
         @input="setFilterBy"
         v-model="filterBy.inStock"
         label="In stock"
-        size="large"
         border
       />
 
