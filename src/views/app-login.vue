@@ -33,7 +33,7 @@
 
 <script lang="ts" setup>
 import { reactive, ref } from 'vue';
-import { userService } from '../services/user-service.js';
+import { userService } from '../services/auth-service.js';
 import type { FormInstance, FormRules } from 'element-plus';
 import { useRouter } from 'vue-router';
 

@@ -1,6 +1,7 @@
 <template>
   <main class="main-layout">
     <nav class="main-nav">
+      <router-link to="/">{{}}</router-link> |
       <router-link to="/home">Home</router-link> |
       <router-link to="/toy"> To App</router-link> |
       <router-link to="/about"> About</router-link>
@@ -14,6 +15,9 @@ export default {
   name: 'App',
   created() {
     this.$store.dispatch({ type: 'loadToys' });
+  },
+  computed: {
+    user() {},
   },
 };
 </script>

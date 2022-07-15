@@ -39,7 +39,10 @@ async function logout() {
 }
 
 function getLoggedInUser() {
-  return JSON.parse(sessionStorage.getItem(STORAGE_KEY));
+  return (
+    sessionStorage.getItem(STORAGE_KEY) && // incase nothing inside loggedinUser
+    JSON.parse(sessionStorage.getItem(STORAGE_KEY))
+  );
 }
 
 function _saveToSession(user) {
