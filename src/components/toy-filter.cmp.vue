@@ -15,6 +15,7 @@
       />
 
       <el-select
+        @change="setFilterBy"
         v-model="filterBy.labels"
         multiple
         collapse-tags
@@ -24,7 +25,9 @@
         <el-option v-for="opt in options" :key="opt" :value="opt" />
       </el-select>
       <div class="sort">
-        <el-button @click="setSortBy('date')" type="info" plain>Date</el-button>
+        <el-button @click="setSortBy('createdAt')" type="info" plain
+          >Date</el-button
+        >
         <el-button @click="setSortBy('name')" type="info" plain>Name</el-button>
         <el-button @click="setSortBy('price')" type="info" plain
           >Price</el-button
@@ -49,6 +52,7 @@ export default {
     };
   },
   created() {
+    this.filterBy = this.$store.getters.filterBy;
     this.setFilterBy = utilService.debounce(this.setFilterBy);
   },
   methods: {
@@ -56,7 +60,7 @@ export default {
       this.$emit('setFilterBy', this.filterCopy);
     },
     setSortBy(status) {
-      this.$emit('setSortBy', status);
+      this.$emit('setSortBy', status, this.filterCopy);
     },
   },
   computed: {

@@ -28,13 +28,15 @@ export default {
     setPage(diff) {
       this.$store.commit({ tpye: 'setPage', diff });
     },
-    setSort(status) {
+    setSort(status, filterBy) {
       this.$store.commit({ type: 'sort', status });
+      this.$store.dispatch({ type: 'loadToys', filterBy });
     },
     setFilter(filterBy) {
       this.$store.dispatch({ type: 'loadToys', filterBy });
     },
   },
+
   computed: {
     toys() {
       return this.$store.getters.toysToDisplay;

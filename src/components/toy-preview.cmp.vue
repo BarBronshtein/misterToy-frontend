@@ -11,12 +11,15 @@
         {{ label }}
       </p>
       <div class="actions">
+        <router-link  :to="'/toy/details/' + toy._id">
         <el-button  type="primary"  >
-          <router-link  :to="'/toy/details/' + toy._id"> Details</router-link>
+           Details
         </el-button>
+           </router-link>
+          <router-link :to="'/toy/edit/' + toy._id">
         <el-button type="warning">
-          <router-link  :to="'/toy/edit/' + toy._id">Edit </router-link>
-        </el-button>
+          Edit</el-button>
+           </router-link>
         <el-button type="danger"  @click="removeToy(toy._id)">Remove</el-button>
       </div>
   </div>

@@ -40,7 +40,8 @@ async function getMapApi() {
   }
 }
 
-async function query(filterBy = null) {
+async function query(filterBy, sortBy) {
+  Object.assign(filterBy, { sortBy });
   try {
     const res = await axios.get(API, { params: filterBy });
     return res.data;
@@ -87,7 +88,6 @@ async function save(toy) {
 
 function getEmptyToy(name = '', price = 70) {
   return {
-    _id: '',
     name,
     price,
     labels: ['Doll', 'Battery Powered', 'Baby'],

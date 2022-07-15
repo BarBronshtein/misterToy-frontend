@@ -4,8 +4,7 @@ export default {
   state: {
     toys: null,
     sortBy: { state: 1, status: '' },
-    page: { numPages: null, curPage: 0 },
-    pageSize: 5,
+    filterBy: null,
   },
   getters: {
     toysPerLabel({ toys }) {
@@ -36,18 +35,11 @@ export default {
       });
       return obj;
     },
-    toysToDisplay({ toys, sortBy }) {
-      let toysCopy = JSON.parse(JSON.stringify(toys));
-      const { state, status } = sortBy;
-      if (status)
-        toysCopy = toysCopy.sort(
-          (a, b) =>
-            (status === 'date' && (a.createdAt - b.createAt) * state) ||
-            (status === 'name' && a.name.localeCompare(b.name) * state) ||
-            (status === 'price' && (a.price - b.price) * state)
-        );
-
-      return toysCopy;
+    filterBy({ filterBy }) {
+      return JSON.parse(JSON.stringify(filterBy));
+    },
+    toysToDisplay({ toys }) {
+      return JSON.parse(JSON.stringify(toys));
     },
   },
   mutations: {
@@ -56,12 +48,17 @@ export default {
     },
     removeToy(state, { toyId }) {
       const idx = state.toys.findIndex(toy => toy._id === toyId);
-      state.toys.splice(idx, 1);
+      if (idx !== -1) state.toys.splice(idx, 1);
     },
-    saveToy(state, { toy }) {
-      const idx = state.toys.findIndex(curToy => curToy._id === toy._id);
+    addToy(state, { toy }) {
+      state.toys.push(toy);
+    },
+    updateToy(state, { toy }) {
+      const idx = state.toys.findIndex(toy => toy._id === toyId);
       if (idx !== -1) state.toys.splice(idx, 1, toy);
-      else state.toys.push(toy);
+    },
+    setFilterBy(state, { filterBy }) {
+      state.filterBy = filterBy;
     },
     setPage(state, { diff }) {
       if (!state.page.numPages) return;
@@ -77,20 +74,34 @@ export default {
     },
   },
   actions: {
-    async loadToys({ commit }, { filterBy = { inStock: true } }) {
-      toyService.query({ filterBy }).then(toys => {
+    async loadToys(
+      { commit, state: { sortBy } },
+      { filterBy = { txt: '', inStock: true, labels: [] } }
+    ) {
+      commit({ type: 'setFilterBy', filterBy });
+      try {
+        const toys = await toyService.query(filterBy, sortBy);
         commit({ type: 'setToys', toys });
-      });
+      } catch (err) {
+        console.error('Sorry try again later');
+      }
     },
     async removeToy({ commit }, { toyId }) {
-      toyService.remove(toyId).then(() => {
+      try {
+        await toyService.remove(toyId);
         commit({ type: 'removeToy', toyId });
-      });
+      } catch (err) {
+        console.error('Sorry try again later');
+      }
     },
     async saveToy({ commit }, { toy }) {
-      toyService.save(toy).then(toy => {
-        commit({ type: 'saveToy', toy });
-      });
+      const type = toy._id ? 'updateToy' : 'addToy';
+      try {
+        const toy = await toyService.save(toy);
+        commit({ type, toy });
+      } catch (err) {
+        console.error(err);
+      }
     },
   },
 };
