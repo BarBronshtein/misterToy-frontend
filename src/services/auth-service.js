@@ -1,9 +1,10 @@
 import axios from 'axios';
-export const userService = {
+axios.defaults.withCredentials = true;
+export const authService = {
   login,
   signup,
   logout,
-  getLoggedInUser,
+  getLoggedinUser,
 };
 
 const API = '//localhost:3030/api/auth/';
@@ -38,7 +39,7 @@ async function logout() {
   }
 }
 
-function getLoggedInUser() {
+function getLoggedinUser() {
   return (
     sessionStorage.getItem(STORAGE_KEY) && // incase nothing inside loggedinUser
     JSON.parse(sessionStorage.getItem(STORAGE_KEY))

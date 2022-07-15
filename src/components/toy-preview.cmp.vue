@@ -16,11 +16,11 @@
            Details
         </el-button>
            </router-link>
-          <router-link :to="'/toy/edit/' + toy._id">
+          <router-link v-if="user?.isAdmin" :to="'/toy/edit/' + toy._id">
         <el-button type="warning">
           Edit</el-button>
            </router-link>
-        <el-button type="danger"  @click="removeToy(toy._id)">Remove</el-button>
+        <el-button type="danger" v-if="user?.isAdmin" @click="removeToy(toy._id)">Remove</el-button>
       </div>
   </div>
       <div class="img-container">
@@ -34,7 +34,11 @@ export default {
   data() {
     return {};
   },
-  computed: {},
+  computed: {
+    user(){
+      return this.$store.getters.user;
+    }
+  },
   props: {
     toy: { type: Object },
   },

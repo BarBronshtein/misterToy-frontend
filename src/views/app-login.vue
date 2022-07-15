@@ -7,6 +7,7 @@
     class="demo-ruleForm"
     :size="formSize"
     status-icon
+    @keyup.enter="submitForm(ruleFormRef)"
   >
     <el-form-item v-if="ruleForm.signup" label="fullname" prop="fullname">
       <el-input v-model="ruleForm.fullname" />
@@ -33,10 +34,12 @@
 
 <script lang="ts" setup>
 import { reactive, ref } from 'vue';
-import { userService } from '../services/auth-service.js';
+import { authService } from '../services/auth-service.js';
 import type { FormInstance, FormRules } from 'element-plus';
 import { useRouter } from 'vue-router';
+import { useStore } from 'vuex';
 
+const store = useStore();
 const router = useRouter();
 const formSize = ref('default');
 const ruleFormRef = ref<FormInstance>();
@@ -66,9 +69,10 @@ const submitForm = async (formEl: FormInstance | undefined) => {
   if (!formEl) return;
   await formEl.validate(async (valid, fields) => {
     if (valid) {
-      ruleForm.signup
-        ? await userService.signup(ruleForm)
-        : await userService.login(ruleForm);
+      const user = ruleForm.signup
+        ? await authService.signup(ruleForm)
+        : await authService.login(ruleForm);
+      store.commit({ type: 'setUser', user });
       router.push('/home');
       formEl.resetFields();
     } else {

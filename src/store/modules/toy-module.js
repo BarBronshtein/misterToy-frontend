@@ -56,7 +56,7 @@ export default {
       state.toys.push(toy);
     },
     updateToy(state, { toy }) {
-      const idx = state.toys.findIndex(toy => toy._id === toyId);
+      const idx = state.toys.findIndex(curToy => toy._id === curToy._id);
       if (idx !== -1) state.toys.splice(idx, 1, toy);
     },
     setFilterBy(state, { filterBy }) {
@@ -100,8 +100,8 @@ export default {
     async saveToy({ commit }, { toy }) {
       const type = toy._id ? 'updateToy' : 'addToy';
       try {
-        const toy = await toyService.save(toy);
-        commit({ type, toy });
+        const savedToy = await toyService.save(toy);
+        commit({ type, toy: savedToy });
       } catch (err) {
         console.error(err);
       }

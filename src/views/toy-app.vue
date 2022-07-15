@@ -1,7 +1,7 @@
 <template>
   <section class="toy-app">
     <toy-filter @setFilterBy="setFilter" @setSortBy="setSort" />
-    <router-link to="toy/edit">Add toy</router-link>
+    <router-link v-if="user?.isAdmin" to="toy/edit">Add toy</router-link>
     <toy-list :toys="toys" @removeToy="removeToy" />
     <!-- <section class="pagination"> -->
     <!-- <button @click="setPage(-1)" class="btn-pagination">Prev</button> -->
@@ -40,6 +40,9 @@ export default {
   computed: {
     toys() {
       return this.$store.getters.toysToDisplay;
+    },
+    user() {
+      return this.$store.getters.user;
     },
   },
 };
