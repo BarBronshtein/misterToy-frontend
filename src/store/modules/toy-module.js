@@ -5,6 +5,7 @@ export default {
     toys: null,
     sortBy: { state: 1, status: '' },
     filterBy: null,
+    page: { numPages: 0, curPage: 0, pageSize: 4 },
   },
   getters: {
     toysPerLabel({ toys }) {
@@ -45,6 +46,7 @@ export default {
   mutations: {
     setToys(state, { toys }) {
       state.toys = toys;
+      state.page.numPages = toys.length / state.page.pageSize;
     },
     removeToy(state, { toyId }) {
       const idx = state.toys.findIndex(toy => toy._id === toyId);
@@ -83,6 +85,7 @@ export default {
         const toys = await toyService.query(filterBy, sortBy);
         commit({ type: 'setToys', toys });
       } catch (err) {
+        console.log(err);
         console.error('Sorry try again later');
       }
     },
