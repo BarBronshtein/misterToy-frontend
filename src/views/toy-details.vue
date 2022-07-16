@@ -15,7 +15,7 @@
   </section>
   <div v-if="showLoginForm" class="modal">
     <el-button @click="closeForm">X</el-button>
-    <login-form />
+    <login-form @formSubmited="closeForm" />
   </div>
 </template>
 
@@ -40,10 +40,9 @@ export default {
   },
   methods: {
     addReview() {
-      if (!this.$store.getters.user) {
+      if (!this.user) {
         this.showLoginForm = true;
       }
-      // return;
     },
     closeForm() {
       this.showLoginForm = false;
@@ -52,6 +51,9 @@ export default {
   computed: {
     timeAgo() {
       return utilService.timeAgo(this.toy.createdAt);
+    },
+    user() {
+      return this.$store.getters.user;
     },
   },
   components: { reviewList, loginForm },

@@ -34,11 +34,12 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, ref } from 'vue';
+import { reactive, ref, defineEmits } from 'vue';
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
 import type { FormInstance, FormRules } from 'element-plus';
 
+const emit = defineEmits(['formSubmited']);
 const router = useRouter();
 const store = useStore();
 const formSize = ref('default');
@@ -69,15 +70,15 @@ const submitForm = async (formEl: FormInstance | undefined) => {
   if (!formEl) return;
   await formEl.validate(async (valid, fields) => {
     if (valid) {
+      const action = ruleForm.signup ? 'signup' : 'login';
       try {
-        const action = ruleForm.signup ? 'signup' : 'login';
-        ruleForm.signup;
         await store.dispatch({
           type: 'logUser',
           action,
           ruleForm,
         });
-        if (router.currentRoute.value.path === '/') router.push('/home');
+        emit('formSubmited');
+        router.currentRoute.value.path === '/' && router.push('/home');
       } catch (err) {
         console.log(err);
         console.error('Something went wrong try again later');
