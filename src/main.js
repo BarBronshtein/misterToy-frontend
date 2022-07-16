@@ -5,7 +5,7 @@ import store from './store';
 import ElementPlus from 'element-plus';
 import 'element-plus/dist/index.css';
 import VueGoogleMaps from '@fawmi/vue-google-maps';
-import { toyService } from './services/toy-services';
+import { toyService } from './services/toy-service';
 import './assets/styles/styles.scss';
 
 const app = createApp(App);

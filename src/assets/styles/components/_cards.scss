@@ -1,8 +1,9 @@
 .card {
   background-color: darken($clr1, 10%);
-  aspect-ratio: 2/1;
+  aspect-ratio: 3/2;
   display: grid;
   grid-template-columns: 4fr 3fr;
+  overflow: hidden;
 
   > * {
     height: 100%;
@@ -21,7 +22,7 @@
   }
 
   img {
-    height: 100%;
+    min-height: 100%;
     max-height: 300px;
     align-self: center;
     object-fit: cover;

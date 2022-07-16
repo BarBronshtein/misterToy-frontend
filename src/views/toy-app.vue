@@ -3,10 +3,14 @@
     <toy-filter @setFilterBy="setFilter" @setSortBy="setSort" />
     <router-link v-if="user?.isAdmin" to="toy/edit">Add toy</router-link>
     <toy-list :toys="toys" @removeToy="removeToy" />
-    <!-- <section class="pagination"> -->
-    <!-- <button @click="setPage(-1)" class="btn-pagination">Prev</button> -->
-    <!-- <button @click="setPage(1)" class="btn-pagination">Next</button> -->
-    <!-- </section> -->
+    <section class="pagination text-center">
+      <el-button type="info" plain @click="setPage(-1)" class="btn-pagination"
+        >Prev</el-button
+      >
+      <el-button type="info" plain @click="setPage(1)" class="btn-pagination"
+        >Next</el-button
+      >
+    </section>
   </section>
 </template>
 
@@ -26,7 +30,7 @@ export default {
       });
     },
     setPage(diff) {
-      this.$store.commit({ tpye: 'setPage', diff });
+      this.$store.commit({ type: 'setPage', diff });
     },
     setSort(status, filterBy) {
       this.$store.commit({ type: 'sort', status });

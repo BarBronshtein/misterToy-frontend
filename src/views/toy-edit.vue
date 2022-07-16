@@ -1,9 +1,8 @@
 <template>
   <section v-if="toyToEdit" class="toy-edit">
-    <router-link to="/toy">Go Back</router-link>
-    {{ toyToEdit }}
     <h2>{{ toyToEdit._id ? 'Edit toy' : 'Add toy' }}</h2>
-    <el-form @keyup.enter="saveToy" class="container" style="max-width: 580px">
+
+    <el-form @keyup.enter="saveToy" class="container">
       <el-form-item>
         <span> Toy name</span>
         <el-input
@@ -14,11 +13,11 @@
         />
       </el-form-item>
       <el-form-item>
-        <span style="margin-inline-end: 1rem">Toy price</span>
+        <span>Toy price</span>
         <el-input-number v-model.number="toyToEdit.price" />
       </el-form-item>
       <el-form-item>
-        <span style="margin-inline-end: 1rem"> Toy labels </span>
+        <span> Toy labels </span>
         <el-select
           v-model="toyToEdit.labels"
           multiple
@@ -41,12 +40,15 @@
           v-model="toyToEdit.inStock"
           label="In stock"
           size="large"
-          style="width: 100%"
           border
         />
       </p>
 
-      <el-button @click="saveToy" class="btn-add-toy">
+      <router-link to="/toy">
+        <el-button> Go Back </el-button>
+      </router-link>
+
+      <el-button type="primary" plain @click="saveToy" class="btn-add-toy">
         {{ toyToEdit._id ? 'Update toy' : 'Add toy' }}
       </el-button>
     </el-form>
@@ -54,7 +56,7 @@
 </template>
 
 <script>
-import { toyService } from '../services/toy-services.js';
+import { toyService } from '../services/toy-service.js';
 
 export default {
   data() {

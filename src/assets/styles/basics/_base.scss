@@ -37,7 +37,7 @@ img {
 
 // links
 a {
-  color: #fff;
+  color: set-text-color($clr1);
   &.active {
     background-color: $clr6;
     color: $clr6;

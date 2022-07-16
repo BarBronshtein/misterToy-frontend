@@ -1,0 +1,30 @@
+.toy-details {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  overflow: hidden;
+  grid-gap: 50px;
+  img {
+    height: 30vw;
+    max-height: 30vw;
+    min-width: 100%;
+    object-fit: cover;
+  }
+  &-description {
+    background-color: darken($clr1, 17%);
+    color: set-text-color(darken($clr1, 17%));
+    display: grid;
+    > * {
+      align-self: center;
+    }
+  }
+  a {
+    grid-column: 1/-1;
+  }
+  .reviews {
+    grid-column: 1/-1;
+    display: grid;
+    button {
+      justify-self: center;
+    }
+  }
+}

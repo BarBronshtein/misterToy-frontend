@@ -1,0 +1,27 @@
+.toy-edit {
+  padding: 3rem;
+  background-color: $clr2;
+  color: set-text-color($clr2);
+  width: 75%;
+  text-align: center;
+  display: grid;
+  margin: 0 auto;
+
+  & p {
+    margin-bottom: 2rem;
+    label {
+      width: 100%;
+      text-align: center;
+    }
+  }
+  .el-form-item__content > :first-child {
+    flex: 1;
+    text-align: left;
+  }
+  .el-form-item__content > :last-child {
+    flex: 4;
+  }
+  .btn-add-toy {
+    margin-inline-start: 2rem;
+  }
+}

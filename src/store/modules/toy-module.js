@@ -1,4 +1,4 @@
-import { toyService } from '../../services/toy-services';
+import { toyService } from '../../services/toy-service';
 
 export default {
   state: {
@@ -39,14 +39,17 @@ export default {
     filterBy({ filterBy }) {
       return JSON.parse(JSON.stringify(filterBy));
     },
-    toysToDisplay({ toys }) {
-      return JSON.parse(JSON.stringify(toys));
+    toysToDisplay({ toys, page: { curPage, pageSize } }) {
+      if (!toys) return;
+      const startIdx = curPage * pageSize;
+      const copyToys = JSON.parse(JSON.stringify(toys));
+      return copyToys.splice(startIdx, startIdx + pageSize);
     },
   },
   mutations: {
     setToys(state, { toys }) {
       state.toys = toys;
-      state.page.numPages = toys.length / state.page.pageSize;
+      state.page.numPages = Math.ceil(toys.length / state.page.pageSize) - 1;
     },
     removeToy(state, { toyId }) {
       const idx = state.toys.findIndex(toy => toy._id === toyId);

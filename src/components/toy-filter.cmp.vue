@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import { toyService } from '../services/toy-services.js';
+import { toyService } from '../services/toy-service.js';
 import { utilService } from '../services/util-service.js';
 export default {
   data() {
