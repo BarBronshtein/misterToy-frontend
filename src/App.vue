@@ -1,36 +1,16 @@
 <template>
   <main class="main-layout">
-    <nav class="main-nav">
-      <a href="" @click="logout">{{ this.user ? 'logout' : 'login' }}</a> |
-      <router-link to="/home">Home</router-link> |
-      <router-link to="/toy"> To App</router-link> |
-      <router-link to="/about"> About</router-link>
-    </nav>
+    <app-header />
     <router-view />
+    <user-msg />
   </main>
 </template>
 
 <script>
+import userMsg from './components/user-msg.cmp.vue';
+import appHeader from './components/app-header.cmp.vue';
 export default {
   name: 'App',
-  created() {
-    this.$store.dispatch({ type: 'loadToys' });
-    this.$store.dispatch({ type: 'loadUser' });
-  },
-  computed: {
-    user() {
-      return this.$store.getters.user;
-    },
-  },
-  methods: {
-    logout() {
-      if (this.user) {
-        this.$store.dispatch({ type: 'logout' });
-      }
-      this.$router.push('/');
-    },
-  },
+  components: { appHeader, userMsg },
 };
 </script>
-
-<style></style>

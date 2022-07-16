@@ -1,0 +1,26 @@
+.login-form {
+  .app-login & {
+    padding: 5rem;
+    background-color: $clr2;
+    width: 75%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    h2 {
+      font-size: rem(45px);
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .el-form-item:nth-child(4) > .el-form-item__content,
+    .el-form-item:nth-child(5) > .el-form-item__content,
+    .el-form-item:last-child > .el-form-item__content {
+      display: flex;
+      justify-content: center;
+    }
+    .el-form-item:last-child {
+      margin: 0;
+    }
+  }
+}

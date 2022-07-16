@@ -10,10 +10,12 @@
 @import 'basics/layout';
 
 // COMPONENTS
-@import 'components/home-page';
-// @import 'components/about-page';
 @import 'components/cards';
-@import 'components/toy-app';
+@import 'components/user-msg';
+@import 'components/toy-list';
 @import 'components/toy-filter';
-@import 'components/toy-details';
-@import 'components/toy-edit';
+@import 'components/login-form';
+// VIEWS
+@import 'views/home-page';
+@import 'views/toy-details';
+@import 'views/toy-edit';

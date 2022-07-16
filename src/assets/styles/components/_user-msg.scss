@@ -1,0 +1,25 @@
+.alert {
+  color: set-text-color($clr2);
+  padding: 10px;
+  font-size: 1.4em;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  opacity: 0;
+  transform: translateX(150px);
+  background-color: $clr2;
+  transition: transform 0.3s;
+  &-success {
+    background-color: #32cd32db;
+    color: set-text-color(#32cd32db);
+  }
+  &-error {
+    background-color: #dc143cdb;
+    color: set-text-color(#dc143cdb);
+  }
+  &-error,
+  &-success {
+    opacity: 1;
+    transform: translate(-50px, -50px);
+  }
+}

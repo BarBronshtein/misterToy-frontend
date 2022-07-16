@@ -93,17 +93,33 @@ export default {
       try {
         await toyService.remove(toyId);
         commit({ type: 'removeToy', toyId });
+        dispatch({
+          type: 'showMsg',
+          msg: { txt: 'Removed toy successfuly', type: 'success' },
+        });
       } catch (err) {
         console.error('Sorry try again later');
+        dispatch({
+          type: 'showMsg',
+          msg: { txt: 'Failed to remove toy', type: 'error' },
+        });
       }
     },
-    async saveToy({ commit }, { toy }) {
+    async saveToy({ commit, dispatch }, { toy }) {
       const type = toy._id ? 'updateToy' : 'addToy';
       try {
         const savedToy = await toyService.save(toy);
         commit({ type, toy: savedToy });
+        dispatch({
+          type: 'showMsg',
+          msg: { txt: type + ' successfuly', type: 'success' },
+        });
       } catch (err) {
-        console.error(err);
+        console.error('Sorry try again later');
+        dispatch({
+          type: 'showMsg',
+          msg: { txt: 'failed to' + type, type: 'error' },
+        });
       }
     },
   },

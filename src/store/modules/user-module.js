@@ -20,6 +20,10 @@ export const userStore = {
         commit({ type: 'setUser', user });
       } catch (err) {
         console.error('Something went wrong try again later');
+        dispatch({
+          type: 'showMsg',
+          msg: { txt: 'Failed to login', type: 'error' },
+        });
       }
     },
     async logout({ commit }) {
@@ -28,6 +32,23 @@ export const userStore = {
         commit({ type: 'setUser', user: null });
       } catch (err) {
         console.error(err);
+        dispatch({
+          type: 'showMsg',
+          msg: { txt: 'Failed to logout', type: 'error' },
+        });
+      }
+    },
+    async logUser({ commit, dispatch }, { action, ruleForm }) {
+      try {
+        console.log(action);
+        const user = await authService[action](ruleForm);
+        commit({ type: 'setUser', user });
+      } catch (err) {
+        dispatch({
+          type: 'showMsg',
+          msg: { txt: `Failed to ${action}`, type: 'error' },
+        });
+        throw new Error(err);
       }
     },
   },

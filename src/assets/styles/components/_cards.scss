@@ -1,6 +1,6 @@
 .card {
   background-color: darken($clr1, 10%);
-  height: 35vh;
+  aspect-ratio: 2/1;
   display: grid;
   grid-template-columns: 4fr 3fr;
 
