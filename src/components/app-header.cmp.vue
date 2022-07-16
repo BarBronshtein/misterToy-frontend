@@ -1,7 +1,7 @@
 <template>
   <header class="app-header">
     <nav class="main-nav">
-      <a href="" @click="logout">{{ this.user ? 'logout' : 'login' }}</a> |
+      <a @click="logout">{{ this.user ? 'logout' : 'login' }}</a> |
       <router-link to="/home">Home</router-link> |
       <router-link to="/toy"> To App</router-link> |
       <router-link to="/about"> About</router-link>

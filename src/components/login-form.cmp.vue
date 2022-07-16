@@ -70,18 +70,14 @@ const submitForm = async (formEl: FormInstance | undefined) => {
   await formEl.validate(async (valid, fields) => {
     if (valid) {
       try {
-        ruleForm.signup
-          ? await store.dispatch({
-              type: 'logUser',
-              action: 'signup',
-              ruleForm,
-            })
-          : await store.dispatch({
-              type: 'logUser',
-              action: 'login',
-              ruleForm,
-            });
-        router.push('/home');
+        const action = ruleForm.signup ? 'signup' : 'login';
+        ruleForm.signup;
+        await store.dispatch({
+          type: 'logUser',
+          action,
+          ruleForm,
+        });
+        if (router.currentRoute.value.path === '/') router.push('/home');
       } catch (err) {
         console.log(err);
         console.error('Something went wrong try again later');

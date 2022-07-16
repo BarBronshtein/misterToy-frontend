@@ -13,16 +13,22 @@
     </div>
     <router-link to="/toy"> Go Back</router-link>
   </section>
+  <div v-if="showLoginForm" class="modal">
+    <el-button @click="closeForm">X</el-button>
+    <login-form />
+  </div>
 </template>
 
 <script>
 import reviewList from '../components/review-list.cmp.vue';
+import loginForm from '../components/login-form.cmp.vue';
 import { toyService } from '../services/toy-service.js';
 import { utilService } from '../services/util-service.js';
 export default {
   data() {
     return {
       toy: null,
+      showLoginForm: false,
     };
   },
   created() {
@@ -34,7 +40,13 @@ export default {
   },
   methods: {
     addReview() {
-      return;
+      if (!this.$store.getters.user) {
+        this.showLoginForm = true;
+      }
+      // return;
+    },
+    closeForm() {
+      this.showLoginForm = false;
     },
   },
   computed: {
@@ -42,6 +54,6 @@ export default {
       return utilService.timeAgo(this.toy.createdAt);
     },
   },
-  components: { reviewList },
+  components: { reviewList, loginForm },
 };
 </script>
