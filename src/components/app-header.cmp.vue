@@ -14,7 +14,7 @@ export default {
   name: 'appHeader',
   created() {
     this.$store.dispatch({ type: 'loadToys' });
-    this.$store.dispatch({ type: 'loadUser' });
+    // this.$store.dispatch({ type: 'loadUser' });
   },
   computed: {
     user() {
