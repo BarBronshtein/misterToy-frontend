@@ -1,7 +1,7 @@
 import { createStore } from 'vuex';
 import toyStore from './modules/toy-module.js';
 import { userStore } from './modules/user-module.js';
-
+import reviewsStore from './modules/reviews-module.js';
 const store = createStore({
   strict: true,
   state: { msg: null },
@@ -29,6 +29,7 @@ const store = createStore({
   modules: {
     toyStore,
     userStore,
+    reviewsStore,
   },
 });
 

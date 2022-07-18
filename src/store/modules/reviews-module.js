@@ -17,20 +17,22 @@ export default {
       state.reviews = reviews;
     },
     removeReview(state, { reviewId }) {
-      const idx = state.reviews(review => review._id === reviewId);
+      const idx = state.reviews.findIndex(review => review._id === reviewId);
       state.reviews.splice(idx, 1);
     },
-
+    addReview(state, { review }) {
+      state.reviews.unshift(review);
+    },
     setFilterBy(state, { filterBy }) {
       state.filterBy = filterBy;
     },
   },
   actions: {
-    async loadReviews({ commit }, { filterBy }) {
-      commit({ type: 'setFilterBy' }, { filterBy });
+    async loadReviews({ commit }, { toyId }) {
+      // commit({ type: 'setFilterBy' }, { filterBy });
       try {
-        const reviews = await reviewService.query(filterBy);
-        commit({ type: 'setToys', reviews });
+        const reviews = await reviewService.query({ toyId });
+        commit({ type: 'setReviews', reviews });
       } catch (err) {
         console.error(err);
       }
@@ -44,6 +46,7 @@ export default {
           msg: { txt: 'Removed review successfuly', type: 'success' },
         });
       } catch (err) {
+        console.log(err);
         console.error('Sorry ty again later');
         dispatch({
           type: 'showMsg',
@@ -51,13 +54,13 @@ export default {
         });
       }
     },
-    async addReview({ dispatch, commit }, { review }) {
+    async addReview({ commit, dispatch }, { review }) {
       try {
-        await reviewService.add(review);
-        await dispatch('loadReviews', { toyId: review.toyId });
+        const newReview = await reviewService.add(review);
+        await commit('addReview', { review: newReview });
         dispatch({
           type: 'showMsg',
-          msg: { txt: 'Addedr eview successfuly', type: 'success' },
+          msg: { txt: 'Added review successfuly', type: 'success' },
         });
       } catch (err) {
         console.error(err);

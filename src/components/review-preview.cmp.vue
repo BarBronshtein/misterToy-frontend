@@ -1,5 +1,14 @@
 <template>
-  <article class="review-preview">{{ review }}</article>
+  <article class="review-preview">
+    {{ review }}
+    <el-button
+      v-if="review?.byUser?._id === user?._id"
+      @click="removeReview"
+      type="danger"
+      plain
+      >Remove</el-button
+    >
+  </article>
 </template>
 
 <script>
@@ -8,8 +17,13 @@ export default {
     review: { type: Object },
   },
   methods: {
-    removeReview(reviewId) {
-      this.$emit('removedReview', reviewId);
+    removeReview() {
+      this.$emit('removedReview', this.review._id);
+    },
+  },
+  computed: {
+    user() {
+      return this.$store.getters.user;
     },
   },
 };

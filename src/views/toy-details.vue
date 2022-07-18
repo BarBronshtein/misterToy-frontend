@@ -8,7 +8,11 @@
       <span>Published: {{ timeAgo }}</span>
     </div>
     <div class="reviews">
-      <review-list v-if="toy.reviews?.length" :reviews="toy.reviews" />
+      <review-list
+        v-if="reviews?.length"
+        :reviews="reviews"
+        @removeReview="removeReview"
+      />
       <el-button @click="addReview">Add review</el-button>
     </div>
     <router-link to="/toy"> Go Back</router-link>
@@ -29,6 +33,7 @@ export default {
     return {
       toy: null,
       showLoginForm: false,
+      filterBy: {},
     };
   },
   created() {
@@ -37,15 +42,24 @@ export default {
     toyService.getById(toyId).then(toy => {
       this.toy = toy;
     });
+    this.$store.dispatch({ type: 'loadReviews', toyId });
   },
   methods: {
     addReview() {
       if (!this.user) {
-        this.showLoginForm = true;
+        return (this.showLoginForm = true);
       }
+      const review = {
+        toyId: this.toy._id,
+        content: 'test',
+      };
+      this.$store.dispatch({ type: 'addReview', review });
     },
     closeForm() {
       this.showLoginForm = false;
+    },
+    removeReview(reviewId) {
+      this.$store.dispatch({ type: 'removeReview', reviewId });
     },
   },
   computed: {
@@ -54,6 +68,9 @@ export default {
     },
     user() {
       return this.$store.getters.user;
+    },
+    reviews() {
+      return this.$store.getters.reviews || [];
     },
   },
   components: { reviewList, loginForm },

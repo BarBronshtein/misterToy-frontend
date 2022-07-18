@@ -1,4 +1,4 @@
-import { httpService } from './http.service';
+import { httpService } from './http-service';
 // import { storageService } from './async-storage.service'
 
 export const reviewService = {
@@ -11,8 +11,9 @@ export const reviewService = {
 // return axios.get('api/toy/?id=1223&balance=13')
 // return axios.get('api/toy/?', {params: {id: 1223, balanse:13}})
 
-function query(filterBy) {
-  return httpService.get(`review`, filterBy);
+async function query(filterBy) {
+  const reviews = await httpService.get(`review`, filterBy);
+  return reviews;
   // return storageService.query('review')
 }
 

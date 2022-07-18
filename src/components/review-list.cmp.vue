@@ -4,7 +4,7 @@
       <li v-for="review in reviews" :key="review._id">
         <review-preview
           :review="review"
-          @removedReeview="$emit('removeReview', $event)"
+          @removedReview="$emit('removeReview', $event)"
         />
       </li>
     </ul>

@@ -49,14 +49,20 @@ export default {
   mutations: {
     setToys(state, { toys }) {
       state.toys = toys;
-      state.page.numPages = Math.ceil(toys.length / state.page.pageSize) - 1;
+      state.page.numPages = Math.ceil(toys?.length / state.page.pageSize) - 1;
     },
     removeToy(state, { toyId }) {
       const idx = state.toys.findIndex(toy => toy._id === toyId);
-      if (idx !== -1) state.toys.splice(idx, 1);
+      if (idx !== -1) {
+        state.toys.splice(idx, 1);
+        state.page.numPages =
+          Math.ceil(state.toys?.length / state.page.pageSize) - 1;
+      }
     },
     addToy(state, { toy }) {
       state.toys.push(toy);
+      state.page.numPages =
+        Math.ceil(state.toys?.length / state.page.pageSize) - 1;
     },
     updateToy(state, { toy }) {
       const idx = state.toys.findIndex(curToy => toy._id === curToy._id);
@@ -66,9 +72,9 @@ export default {
       state.filterBy = filterBy;
     },
     setPage(state, { diff }) {
-      if (!state.page.numPages) return;
       state.page.curPage += diff;
-      if (state.page.curPage < 0) state.page.curPage = state.page.numPages;
+      if (state.page.curPage < 0)
+        state.page.curPage = state.page.numPages >= 0 ? state.page.numPages : 0;
       if (state.page.curPage > state.page.numPages) state.page.curPage = 0;
     },
 
@@ -92,7 +98,7 @@ export default {
         console.error('Sorry try again later');
       }
     },
-    async removeToy({ commit }, { toyId }) {
+    async removeToy({ dispatch, commit }, { toyId }) {
       try {
         await toyService.remove(toyId);
         commit({ type: 'removeToy', toyId });
