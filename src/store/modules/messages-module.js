@@ -1,4 +1,4 @@
-import { messageService } from '../../services/message-service';
+import { msgService } from '../../services/msg-service';
 export default {
   state: {
     messages: null,
@@ -13,23 +13,23 @@ export default {
       state.messages = messages;
     },
 
-    addMessages(state, { messages }) {
-      state.messagess.push(messages);
+    addMsg(state, { msg }) {
+      state.messagess.push(msg);
     },
   },
   actions: {
     async loadMessages({ commit }) {
       try {
-        const reviews = await reviewService.query({ toyId });
-        commit({ type: 'setReviews', reviews });
+        const messages = await messageService.query({ toyId });
+        commit({ type: 'setMessages', messages });
       } catch (err) {
         console.error(err);
       }
     },
-    async addMessage({ commit, dispatch }, { review }) {
+    async addMsg({ commit, dispatch }, { msg }) {
       try {
-        const newReview = await reviewService.add(review);
-        await commit('addReview', { review: newReview });
+        const newMsg = await msgService.add(msg);
+        await commit('addReview', { msg: newMsg });
         dispatch({
           type: 'showMsg',
           msg: { txt: 'Added review successfuly', type: 'success' },
