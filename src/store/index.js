@@ -2,6 +2,7 @@ import { createStore } from 'vuex';
 import toyStore from './modules/toy-module.js';
 import { userStore } from './modules/user-module.js';
 import reviewsStore from './modules/reviews-module.js';
+import msgStore from './modules/messages-module.js';
 const store = createStore({
   strict: true,
   state: { msg: null },
@@ -30,6 +31,7 @@ const store = createStore({
     toyStore,
     userStore,
     reviewsStore,
+    msgStore,
   },
 });
 

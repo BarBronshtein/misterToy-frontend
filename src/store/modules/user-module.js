@@ -2,7 +2,7 @@ import { authService } from '../../services/auth-service';
 import { userService } from '../../services/user-service';
 export const userStore = {
   state: {
-    user: null,
+    user: authService.getLoggedinUser() || null,
     users: null,
   },
   mutations: {
@@ -34,18 +34,7 @@ export const userStore = {
         });
       }
     },
-    async loadUser({ commit }) {
-      try {
-        const user = await authService.getLoggedinUser();
-        commit({ type: 'setUser', user });
-      } catch (err) {
-        console.error('Something went wrong try again later');
-        dispatch({
-          type: 'showMsg',
-          msg: { txt: 'Failed to login', type: 'error' },
-        });
-      }
-    },
+
     async logout({ commit }) {
       try {
         await authService.logout();

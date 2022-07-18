@@ -1,4 +1,4 @@
-import { msgService } from '../../services/msg-service';
+import { socketService } from '../../services/socket-service';
 export default {
   state: {
     messages: null,
@@ -20,7 +20,7 @@ export default {
   actions: {
     async loadMessages({ commit }) {
       try {
-        const messages = await messageService.query({ toyId });
+        const messages = await socketService.on({ toyId });
         commit({ type: 'setMessages', messages });
       } catch (err) {
         console.error(err);
@@ -28,7 +28,7 @@ export default {
     },
     async addMsg({ commit, dispatch }, { msg }) {
       try {
-        const newMsg = await msgService.add(msg);
+        const newMsg = await socketService.emit(msg);
         await commit('addReview', { msg: newMsg });
         dispatch({
           type: 'showMsg',

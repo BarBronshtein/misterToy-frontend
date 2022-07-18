@@ -17,6 +17,7 @@
     </div>
     <router-link to="/toy"> Go Back</router-link>
   </section>
+  <chat-room v-if="toy" :msgs="toy.msgs" :toyId="toy._id" />
   <div v-if="showLoginForm" class="modal">
     <el-button @click="closeForm">X</el-button>
     <login-form @formSubmited="closeForm" />
@@ -28,6 +29,7 @@ import reviewList from '../components/review-list.cmp.vue';
 import loginForm from '../components/login-form.cmp.vue';
 import { toyService } from '../services/toy-service.js';
 import { utilService } from '../services/util-service.js';
+import chatRoom from '../components/chat-room.cmp.vue';
 export default {
   data() {
     return {
@@ -73,6 +75,6 @@ export default {
       return this.$store.getters.reviews || [];
     },
   },
-  components: { reviewList, loginForm },
+  components: { reviewList, loginForm, chatRoom },
 };
 </script>
