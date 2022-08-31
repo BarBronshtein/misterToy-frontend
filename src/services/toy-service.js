@@ -49,7 +49,6 @@ async function query(filterBy, sortBy) {
     console.error(err);
     // throw new Error('Oops try again later')
   }
-  return;
 }
 
 async function getById(toyId) {
